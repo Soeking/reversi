@@ -1,0 +1,12 @@
+{
+  "main": "kotlin/kotlin-wrappers-kotlin-react-router-dom-jsLegacy.js",
+  "devDependencies": {},
+  "dependencies": {
+    "react-router-dom": "^5.1.2"
+  },
+  "peerDependencies": {},
+  "optionalDependencies": {},
+  "bundledDependencies": [],
+  "name": "kotlin-wrappers-kotlin-react-router-dom-jsLegacy",
+  "version": "1.0.0-SNAPSHOT"
+}

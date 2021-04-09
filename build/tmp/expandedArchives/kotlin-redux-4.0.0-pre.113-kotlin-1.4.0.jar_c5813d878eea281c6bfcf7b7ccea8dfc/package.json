@@ -1,0 +1,12 @@
+{
+  "main": "kotlin/kotlin-wrappers-kotlin-redux-jsLegacy.js",
+  "devDependencies": {},
+  "dependencies": {
+    "redux": "^4.0.0"
+  },
+  "peerDependencies": {},
+  "optionalDependencies": {},
+  "bundledDependencies": [],
+  "name": "kotlin-wrappers-kotlin-redux-jsLegacy",
+  "version": "1.0.0-SNAPSHOT"
+}

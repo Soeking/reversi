@@ -1,0 +1,17 @@
+{
+  "name": "reversi",
+  "version": "1.0.0-SNAPSHOT",
+  "main": "reversi.js",
+  "devDependencies": {
+    "webpack": "4.44.1",
+    "webpack-cli": "3.3.12",
+    "source-map-loader": "1.1.0",
+    "css-loader": "4.3.0",
+    "style-loader": "1.2.1",
+    "dukat": "0.5.8-rc.3"
+  },
+  "dependencies": {},
+  "peerDependencies": {},
+  "optionalDependencies": {},
+  "bundledDependencies": []
+}
