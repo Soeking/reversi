@@ -30,9 +30,9 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew build
-    - name: copy to doc
+    - name: copy to docs
       run: |
-       cp -pr build/distributions doc/
+       cp -pr build/distributions docs
        git config user.name "Soeking"
        git config user.email "great.from.g@gmail.com"
        git remote set-url origin https://github.com/Soeking/riversi.git
