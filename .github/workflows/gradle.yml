@@ -23,7 +23,7 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
     - name: copy to doc
-    - run: |
+      run: |
        cp -pr build/distributions doc/
        git config user.name "Soeking"
        git config user.email "great.from.g@gmail.com"
