@@ -5,6 +5,9 @@ import kotlinx.browser.window
 fun main() {
     window.onload = {
         render(document.getElementById("root")) {
+            info()
         }
+    }
+    CanvasState().apply {
     }
 }
