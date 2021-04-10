@@ -8,4 +8,6 @@ fun main() {
             info()
         }
     }
+    CanvasState().apply {
+    }
 }
