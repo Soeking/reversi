@@ -1,2 +1,2 @@
 # Reversi
-https://soeking.github.io/riversi/
+https://soeking.github.io/reversi/
