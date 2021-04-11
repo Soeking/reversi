@@ -9,6 +9,7 @@ class CanvasState {
     private val width = canvas.width / 2.0
     private val height = canvas.height / 2.0
     private val boardSize = minOf(width, height)
+    private var gridSize = boardSize / Info.gameSize
     private val interval = 1000 / 30
 
     init {
@@ -39,5 +40,9 @@ class CanvasState {
         context.strokeStyle = "#000000"
         context.lineWidth = 2.0
         context.strokeRect(width, 0.0, boardSize, boardSize)
+    }
+
+    private fun drawBoard() {
+
     }
 }
