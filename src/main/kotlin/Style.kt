@@ -9,7 +9,6 @@ object Style : StyleSheet("Style", isStatic = true) {
 
         canvas {
             marginTop = 50.px
-            marginBottom = 100.px
         }
     }
 
