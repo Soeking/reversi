@@ -3,9 +3,17 @@ import react.*
 import styled.css
 import styled.styledButton
 
-class Info : RComponent<RProps, RState>() {
-    companion object {
-        var gameSize = 8
+interface Props : RProps
+
+interface State : RState
+
+class Info : RComponent<Props, State>() {
+    private var canvas: Canvas
+    private var gameSize: Int
+
+    init {
+        gameSize = 8
+        canvas = Canvas(gameSize)
     }
 
     override fun RBuilder.render() {
@@ -14,6 +22,10 @@ class Info : RComponent<RProps, RState>() {
                 +Style.restart
             }
             +"restart"
+            attrs.onClickFunction = {
+                canvas.destroy()
+                canvas = Canvas(gameSize)
+            }
         }
         styledButton {
             css {
@@ -27,7 +39,7 @@ class Info : RComponent<RProps, RState>() {
                 +Style.gameSize
             }
             +"8"
-            attrs.onClickFunction = { gameSize = 6 }
+            attrs.onClickFunction = { gameSize = 8 }
         }
     }
 }

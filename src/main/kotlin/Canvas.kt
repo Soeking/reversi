@@ -3,14 +3,14 @@ import kotlinx.browser.window
 import org.w3c.dom.*
 import org.w3c.dom.events.MouseEvent
 
-class CanvasState {
+class Canvas(private val gameSize: Int) {
     private val canvas = initializeCanvas()
     private val context = canvas.getContext("2d") as CanvasRenderingContext2D
     private val width = canvas.width / 2.0
     private val height = canvas.height.toDouble()
     private val boardSize = minOf(width, height)
     private val origin = canvas.width / 3.0
-    private var gridSize = boardSize / Info.gameSize
+    private var gridSize = boardSize / gameSize
     private val interval = 1000 / 30
 
     init {
@@ -34,6 +34,10 @@ class CanvasState {
         return canvas
     }
 
+    fun destroy() {
+        document.body!!.removeChild(canvas)
+    }
+
     private fun clear() {
     }
 
@@ -41,8 +45,8 @@ class CanvasState {
         context.fillStyle = "#30EE50"
         context.strokeStyle = "#000000"
         context.lineWidth = 1.0
-        for (x in 0 until Info.gameSize) {
-            for (y in 0 until Info.gameSize) {
+        for (x in 0 until gameSize) {
+            for (y in 0 until gameSize) {
                 context.fillRect(origin + x * gridSize, y * gridSize, gridSize, gridSize)
                 context.strokeRect(origin + x * gridSize, y * gridSize, gridSize, gridSize)
             }
