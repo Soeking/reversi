@@ -7,8 +7,9 @@ class CanvasState {
     private val canvas = initializeCanvas()
     private val context = canvas.getContext("2d") as CanvasRenderingContext2D
     private val width = canvas.width / 2.0
-    private val height = canvas.height / 2.0
+    private val height = canvas.height.toDouble()
     private val boardSize = minOf(width, height)
+    private val origin = canvas.width / 3.0
     private var gridSize = boardSize / Info.gameSize
     private val interval = 1000 / 30
 
@@ -20,29 +21,31 @@ class CanvasState {
         }
 
         window.setInterval({
-//            draw()
+            drawBoard()
         }, interval)
-        clear()
     }
 
     private fun initializeCanvas(): HTMLCanvasElement {
         val canvas = document.createElement("canvas") as HTMLCanvasElement
         val context = canvas.getContext("2d") as CanvasRenderingContext2D
         context.canvas.width = window.innerWidth
-        context.canvas.height = window.innerHeight * 4 / 5
+        context.canvas.height = window.innerHeight * 7 / 10
         document.body!!.appendChild(canvas)
         return canvas
     }
 
     private fun clear() {
-        context.fillStyle = "#30EE50"
-        context.fillRect(width, 0.0, boardSize, boardSize)
-        context.strokeStyle = "#000000"
-        context.lineWidth = 2.0
-        context.strokeRect(width, 0.0, boardSize, boardSize)
     }
 
     private fun drawBoard() {
-
+        context.fillStyle = "#30EE50"
+        context.strokeStyle = "#000000"
+        context.lineWidth = 1.0
+        for (x in 0 until Info.gameSize) {
+            for (y in 0 until Info.gameSize) {
+                context.fillRect(origin + x * gridSize, y * gridSize, gridSize, gridSize)
+                context.strokeRect(origin + x * gridSize, y * gridSize, gridSize, gridSize)
+            }
+        }
     }
 }
