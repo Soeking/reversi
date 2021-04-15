@@ -12,6 +12,7 @@ class Canvas(private val gameSize: Int) {
     private val origin = canvas.width / 3.0
     private var gridSize = boardSize / gameSize
     private val interval = 1000 / 30
+    private val game = Game(gameSize)
 
     init {
         canvas.onmousedown = { e: MouseEvent ->
@@ -36,9 +37,6 @@ class Canvas(private val gameSize: Int) {
 
     fun destroy() {
         document.body!!.removeChild(canvas)
-    }
-
-    private fun clear() {
     }
 
     private fun drawBoard() {
