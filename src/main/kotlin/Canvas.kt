@@ -2,6 +2,7 @@ import kotlinx.browser.document
 import kotlinx.browser.window
 import org.w3c.dom.*
 import org.w3c.dom.events.MouseEvent
+import kotlin.math.PI
 
 class Canvas(private val gameSize: Int) {
     private val canvas = initializeCanvas()
@@ -10,7 +11,9 @@ class Canvas(private val gameSize: Int) {
     private val height = canvas.height.toDouble()
     private val boardSize = minOf(width, height)
     private val origin = canvas.width / 3.0
-    private var gridSize = boardSize / gameSize
+    private val gridSize = boardSize / gameSize
+    private val halfGridSize = gridSize / 2.0
+    private val endAngle = 2 * PI
     private val interval = 1000 / 30
     private val game = Game(gameSize)
 
@@ -23,13 +26,14 @@ class Canvas(private val gameSize: Int) {
 
         window.setInterval({
             drawBoard()
+            drawStones()
         }, interval)
     }
 
     private fun initializeCanvas(): HTMLCanvasElement {
         val canvas = document.createElement("canvas") as HTMLCanvasElement
         val context = canvas.getContext("2d") as CanvasRenderingContext2D
-        context.canvas.width = window.innerWidth
+        context.canvas.width = window.innerWidth * 9 / 10
         context.canvas.height = window.innerHeight * 7 / 10
         document.body!!.appendChild(canvas)
         return canvas
@@ -49,5 +53,22 @@ class Canvas(private val gameSize: Int) {
                 context.strokeRect(origin + x * gridSize, y * gridSize, gridSize, gridSize)
             }
         }
+    }
+
+    private fun drawStones() {
+        for (x in 0 until gameSize) {
+            for (y in 0 until gameSize) {
+                game.stones[x][y]?.let {
+                    drawCircle(origin + x * gridSize + halfGridSize, y * gridSize + halfGridSize, it)
+                }
+            }
+        }
+    }
+
+    private fun drawCircle(x: Double, y: Double, color: Boolean) {
+        context.fillStyle = if (color) "#000000" else "#FFFFFF"
+        context.beginPath()
+        context.arc(x, y, halfGridSize, 0.0, endAngle)
+        context.fill()
     }
 }
