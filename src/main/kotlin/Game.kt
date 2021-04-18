@@ -1,6 +1,7 @@
 class Game(private var gameSize: Int) {
     //true => black, false => white
     private val stones = Array<Array<Boolean?>>(gameSize) { Array(gameSize) { null } }
+    private var turn = true
 
     init {
         if (gameSize == 8) {
@@ -26,5 +27,17 @@ class Game(private var gameSize: Int) {
                 }
             }
         }
+    }
+
+    fun clickBoard(x: Int, y: Int) {
+        if (check(x, y)) {
+            stones[x][y] = turn
+            turn = !turn
+        }
+    }
+
+    private fun check(x: Int, y: Int): Boolean {
+        if (stones[x][y] != null) return false
+        return true
     }
 }

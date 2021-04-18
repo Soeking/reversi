@@ -67,8 +67,10 @@ class Canvas(private val gameSize: Int) {
     }
 
     private fun handleClick(event: MouseEvent) {
-        if ((event.offsetX in origin..(origin + boardSize)) && event.offsetY in 0.0..boardSize) {
-
+        val x = event.offsetX - origin
+        val y = event.offsetY
+        if ((x in 0.0..boardSize) && y in 0.0..boardSize) {
+            game.clickBoard(x.toInt() / gridSize.toInt(), y.toInt() / gridSize.toInt())
         }
     }
 }
