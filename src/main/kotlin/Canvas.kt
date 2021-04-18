@@ -18,10 +18,8 @@ class Canvas(private val gameSize: Int) {
     private val game = Game(gameSize)
 
     init {
-        canvas.onmousedown = { e: MouseEvent ->
-        }
-
-        canvas.onmousemove = { e: MouseEvent ->
+        canvas.onclick = { e: MouseEvent ->
+            handleClick(e)
         }
 
         window.setInterval({
@@ -56,12 +54,8 @@ class Canvas(private val gameSize: Int) {
     }
 
     private fun drawStones() {
-        for (x in 0 until gameSize) {
-            for (y in 0 until gameSize) {
-                game.stones[x][y]?.let {
-                    drawCircle(origin + x * gridSize + halfGridSize, y * gridSize + halfGridSize, it)
-                }
-            }
+        game.getStones().forEach {
+            drawCircle(origin + it.first * gridSize + halfGridSize, it.second * gridSize + halfGridSize, it.third)
         }
     }
 
@@ -70,5 +64,11 @@ class Canvas(private val gameSize: Int) {
         context.beginPath()
         context.arc(x, y, halfGridSize, 0.0, endAngle)
         context.fill()
+    }
+
+    private fun handleClick(event: MouseEvent) {
+        if ((event.offsetX in origin..(origin + boardSize)) && event.offsetY in 0.0..boardSize) {
+
+        }
     }
 }
