@@ -1,3 +1,5 @@
+import kotlinx.css.tr
+
 class Game(private var gameSize: Int) {
     //true => black, false => white
     private val stones = Array<Array<Boolean?>>(gameSize) { Array(gameSize) { null } }
@@ -38,6 +40,33 @@ class Game(private var gameSize: Int) {
 
     private fun check(x: Int, y: Int): Boolean {
         if (stones[x][y] != null) return false
-        return true
+        if (checkAround(x, y, { it }, { it - 1 })) return true
+        if (checkAround(x, y, { it + 1 }, { it - 1 })) return true
+        if (checkAround(x, y, { it + 1 }, { it })) return true
+        if (checkAround(x, y, { it + 1 }, { it + 1 })) return true
+        if (checkAround(x, y, { it }, { it + 1 })) return true
+        if (checkAround(x, y, { it - 1 }, { it + 1 })) return true
+        if (checkAround(x, y, { it - 1 }, { it })) return true
+        if (checkAround(x, y, { it - 1 }, { it - 1 })) return true
+        return false
+    }
+
+    private fun checkAround(setX: Int, setY: Int, expX: (Int) -> Int, expY: (Int) -> Int): Boolean {
+        var x = expX(setX)
+        var y = expY(setY)
+        if (x !in 0 until gameSize || y !in 0 until gameSize) return false
+        if (stones[x][y] != !turn) return false
+        x = expX(x)
+        y = expY(y)
+        while ((x in 0 until gameSize) && (y in 0 until gameSize)) {
+            when (stones[x][y]) {
+                turn -> return true
+                !turn -> continue
+                null -> return false
+            }
+            x = expX(x)
+            y = expY(y)
+        }
+        return false
     }
 }

@@ -2,7 +2,7 @@ plugins {
     kotlin("js") version "1.4.32"
 }
 
-group = "riv.soeki"
+group = "rev.soeki"
 version = "1.0-SNAPSHOT"
 
 repositories {
@@ -33,6 +33,10 @@ kotlin {
             }
             testTask {
                 useKarma {
+                    useFirefox()
+                    useChrome()
+                    useSafari()
+                    useChromium()
                     useChromeHeadless()
                     webpackConfig.cssSupport.enabled = true
                 }
