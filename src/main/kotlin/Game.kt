@@ -1,5 +1,3 @@
-import kotlinx.css.tr
-
 class Game(private var gameSize: Int) {
     //true => black, false => white
     private val stones = Array<Array<Boolean?>>(gameSize) { Array(gameSize) { null } }
@@ -68,5 +66,9 @@ class Game(private var gameSize: Int) {
             y = expY(y)
         }
         return false
+    }
+
+    private fun reverseStones(){
+
     }
 }
