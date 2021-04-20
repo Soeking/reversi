@@ -32,6 +32,7 @@ class Game(private var gameSize: Int) {
     fun clickBoard(x: Int, y: Int) {
         if (check(x, y)) {
             stones[x][y] = turn
+            reverseStones(x, y)
             turn = !turn
         }
     }
@@ -68,7 +69,25 @@ class Game(private var gameSize: Int) {
         return false
     }
 
-    private fun reverseStones(){
+    private fun reverseStones(x: Int, y: Int) {
+        if (checkAround(x, y, { it }, { it - 1 })) reverse(x, y, { it }, { it - 1 })
+        if (checkAround(x, y, { it + 1 }, { it - 1 })) reverse(x, y, { it + 1 }, { it - 1 })
+        if (checkAround(x, y, { it + 1 }, { it })) reverse(x, y, { it + 1 }, { it })
+        if (checkAround(x, y, { it + 1 }, { it + 1 })) reverse(x, y, { it + 1 }, { it + 1 })
+        if (checkAround(x, y, { it }, { it + 1 })) reverse(x, y, { it }, { it + 1 })
+        if (checkAround(x, y, { it - 1 }, { it + 1 })) reverse(x, y, { it - 1 }, { it + 1 })
+        if (checkAround(x, y, { it - 1 }, { it })) reverse(x, y, { it - 1 }, { it })
+        if (checkAround(x, y, { it - 1 }, { it - 1 })) reverse(x, y, { it - 1 }, { it - 1 })
+    }
 
+    private fun reverse(setX: Int, setY: Int, expX: (Int) -> Int, expY: (Int) -> Int) {
+        var x = expX(setX)
+        var y = expY(setY)
+        while ((x in 0 until gameSize) && (y in 0 until gameSize)) {
+            stones[x][y] = turn
+            if (stones[x][y] == turn) break
+            x = expX(x)
+            y = expY(y)
+        }
     }
 }
