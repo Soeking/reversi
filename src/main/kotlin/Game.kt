@@ -59,9 +59,8 @@ class Game(private var gameSize: Int) {
         y = expY(y)
         while ((x in 0 until gameSize) && (y in 0 until gameSize)) {
             when (stones[x][y]) {
-                turn -> return true
-                !turn -> continue
                 null -> return false
+                turn -> return true
             }
             x = expX(x)
             y = expY(y)
@@ -84,8 +83,8 @@ class Game(private var gameSize: Int) {
         var x = expX(setX)
         var y = expY(setY)
         while ((x in 0 until gameSize) && (y in 0 until gameSize)) {
-            stones[x][y] = turn
             if (stones[x][y] == turn) break
+            stones[x][y] = turn
             x = expX(x)
             y = expY(y)
         }
