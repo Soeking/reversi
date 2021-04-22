@@ -3,11 +3,7 @@ import react.*
 import styled.css
 import styled.styledButton
 
-interface Props : RProps
-
-interface State : RState
-
-class Info : RComponent<Props, State>() {
+class Info : RComponent<RProps, RState>() {
     private var canvas: Canvas
     private var gameSize: Int
 
