@@ -34,6 +34,7 @@ class Game(private var gameSize: Int) {
             stones[x][y] = turn
             reverseStones(x, y)
             turn = !turn
+            if (canSet().not()) turn = !turn
         }
     }
 
@@ -88,5 +89,16 @@ class Game(private var gameSize: Int) {
             x = expX(x)
             y = expY(y)
         }
+    }
+
+    private fun canSet(): Boolean {
+        for (x in 0 until gameSize) {
+            for (y in 0 until gameSize) {
+                if (stones[x][y] == null) {
+                    if (check(x, y)) return true
+                }
+            }
+        }
+        return false
     }
 }
