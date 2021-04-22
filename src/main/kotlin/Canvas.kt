@@ -78,6 +78,6 @@ class Canvas(private val gameSize: Int) {
 
     private fun drawFinish(black: Int, white: Int) {
         context.font = "48px serif"
-        context.fillText("$black : $white", origin + boardSize + 100, 100.0)
+        context.fillText("⚫ $black : $white ⚪", origin + boardSize + 100, 100.0)
     }
 }
