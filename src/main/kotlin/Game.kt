@@ -1,3 +1,5 @@
+import kotlinx.html.I
+
 class Game(private var gameSize: Int) {
     //true => black, false => white
     private val stones = Array<Array<Boolean?>>(gameSize) { Array(gameSize) { null } }
@@ -29,13 +31,15 @@ class Game(private var gameSize: Int) {
         }
     }
 
-    fun clickBoard(x: Int, y: Int) {
+    fun clickBoard(x: Int, y: Int): Pair<Int, Int>? {
         if (check(x, y)) {
             stones[x][y] = turn
             reverseStones(x, y)
             turn = !turn
             if (canSet().not()) turn = !turn
+            if (canSet().not()) return endGame()
         }
+        return null
     }
 
     private fun check(x: Int, y: Int): Boolean {
@@ -100,5 +104,19 @@ class Game(private var gameSize: Int) {
             }
         }
         return false
+    }
+
+    private fun endGame(): Pair<Int, Int> {
+        var black = 0
+        var white = 0
+        stones.forEach {
+            it.forEach { b ->
+                when (b) {
+                    true -> black++
+                    false -> white++
+                }
+            }
+        }
+        return Pair(black, white)
     }
 }

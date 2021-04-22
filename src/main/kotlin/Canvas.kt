@@ -70,7 +70,14 @@ class Canvas(private val gameSize: Int) {
         val x = event.offsetX - origin
         val y = event.offsetY
         if ((x in 0.0..boardSize) && y in 0.0..boardSize) {
-            game.clickBoard(x.toInt() / gridSize.toInt(), y.toInt() / gridSize.toInt())
+            game.clickBoard(x.toInt() / gridSize.toInt(), y.toInt() / gridSize.toInt())?.let {
+                drawFinish(it.first, it.second)
+            }
         }
+    }
+
+    private fun drawFinish(black: Int, white: Int) {
+        context.font = "48px serif"
+        context.fillText("$black : $white", origin + boardSize + 100, 100.0)
     }
 }
