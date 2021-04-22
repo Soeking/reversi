@@ -15,8 +15,9 @@ object Style : StyleSheet("Style", isStatic = true) {
     val restart by css {
         width = 80.px
         textAlign = TextAlign.center
-        marginLeft = 500.px
         padding(10.px)
+        marginLeft = 500.px
+        marginRight = 5.px
         hover {
             backgroundColor = rgba(200, 200, 200, 0.7)
         }
@@ -24,6 +25,7 @@ object Style : StyleSheet("Style", isStatic = true) {
 
     val gameSize by css {
         padding(10.px)
+        margin(5.px)
         hover {
             backgroundColor = rgba(180, 180, 250, 0.8)
         }
